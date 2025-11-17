@@ -15,9 +15,9 @@ export const GET: RequestHandler = async ({ url }) => {
   // Get the base URL - uses PUBLIC_BASE_URL from env, or falls back to request origin
   const baseUrl = env.PUBLIC_BASE_URL || url.origin;
   
-  // Audio file is served from /static/audio/what-time-is-it.mp3
+  // Audio file is served from /static/audio/what-time-is-it.m4a
   // SvelteKit automatically serves static files from the /static folder
-  const audioUrl = `${baseUrl}/audio/what-time-is-it.mp3`;
+  const audioUrl = `${baseUrl}/audio/what-time-is-it.m4a`;
   
   console.log(`🎙️ TwiML endpoint called - Audio URL: ${audioUrl}`);
   
