@@ -11,7 +11,7 @@
 import type { RequestHandler } from './$types';
 import { env } from '$env/dynamic/private';
 
-export const GET: RequestHandler = async ({ url }) => {
+const handleTwiML: RequestHandler = async ({ url }) => {
   // Get the base URL - uses PUBLIC_BASE_URL from env, or falls back to request origin
   const baseUrl = env.PUBLIC_BASE_URL || url.origin;
   
@@ -32,10 +32,16 @@ export const GET: RequestHandler = async ({ url }) => {
   return new Response(twiml, {
     status: 200,
     headers: {
-      'Content-Type': 'application/xml',
+      'Content-Type': 'text/xml',
     },
   });
 };
+
+// Twilio sends POST requests by default
+export const POST: RequestHandler = handleTwiML;
+
+// Also support GET for testing
+export const GET: RequestHandler = handleTwiML;
 
 // How it works:
 // 1. When a scheduled call is due, the cron job calls Twilio API
