@@ -6,7 +6,10 @@ const config = {
 	preprocess: vitePreprocess(),
 	kit: {
 		adapter: adapter({
-			runtime: 'nodejs20.x'
+			runtime: 'nodejs20.x',
+			// Ensure static assets are properly deployed
+			external: [],
+			split: false
 		})
 	}
 };

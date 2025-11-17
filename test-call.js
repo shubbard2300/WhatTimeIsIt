@@ -31,7 +31,7 @@ async function makeTestCall() {
       to: '+14153597606',
       from: twilioPhoneNumber,
       // Use the deployed Vercel URL so Twilio can reach it
-      url: 'https://what-time-is-hbwqgnb2w-gamecat2300-6951s-projects.vercel.app/api/twilio/what-time-is-it',
+      url: 'https://what-time-is-7ic9cwsgk-gamecat2300-6951s-projects.vercel.app/api/twilio/what-time-is-it',
     });
     
     console.log('✅ Call initiated successfully!');

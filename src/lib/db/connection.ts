@@ -6,9 +6,21 @@
  */
 
 import { drizzle } from 'drizzle-orm/vercel-postgres';
-import { sql as vercelSql } from '@vercel/postgres';
+import { createClient } from '@vercel/postgres';
 import * as schema from './schema';
+import { env } from '$env/dynamic/private';
+
+// Get the connection string from environment
+const connectionString = env.POSTGRES_URL;
+
+if (!connectionString) {
+  throw new Error('POSTGRES_URL environment variable is not set');
+}
+
+// Create a client connection with explicit connection string
+const client = createClient({
+  connectionString
+});
 
 // Create the Drizzle database instance
-// This uses the POSTGRES_URL environment variable automatically via @vercel/postgres
-export const db = drizzle(vercelSql, { schema });
+export const db = drizzle(client, { schema });
