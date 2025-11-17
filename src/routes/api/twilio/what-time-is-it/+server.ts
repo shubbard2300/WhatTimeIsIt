@@ -1,17 +1,32 @@
 /**
  * API Route: Twilio TwiML Response
- * GET /api/twilio/what-time-is-it
+ * POST/GET /api/twilio/what-time-is-it
  * 
  * Returns TwiML XML instructions telling Twilio to play the Ken Nordine audio.
  * This URL is provided to Twilio when creating the outbound call.
  * 
- * Audio file: /static/audio/what-time-is-it.m4a
+ * Audio file: /static/audio/what-time-is-it.mp3
+ * 
+ * IMPORTANT: This endpoint must be publicly accessible without authentication
+ * for Twilio webhooks to work. If using Vercel Deployment Protection, you must
+ * disable it or add Twilio IPs to the allowlist.
  */
+
+// Force Node.js runtime (not edge) for compatibility
+export const config = {
+  runtime: 'nodejs'
+};
 
 import type { RequestHandler } from './$types';
 import { env } from '$env/dynamic/private';
 
-const handleTwiML: RequestHandler = async ({ url }) => {
+const handleTwiML: RequestHandler = async ({ url, request }) => {
+  // Log incoming request for debugging
+  console.log(`🎙️ TwiML endpoint called`);
+  console.log(`   Method: ${request.method}`);
+  console.log(`   Origin: ${url.origin}`);
+  console.log(`   User-Agent: ${request.headers.get('user-agent')}`);
+  
   // Get the base URL - uses PUBLIC_BASE_URL from env, or falls back to request origin
   const baseUrl = env.PUBLIC_BASE_URL || url.origin;
   
@@ -19,20 +34,23 @@ const handleTwiML: RequestHandler = async ({ url }) => {
   // SvelteKit automatically serves static files from the /static folder
   const audioUrl = `${baseUrl}/audio/what-time-is-it.mp3`;
   
-  console.log(`🎙️ TwiML endpoint called - Audio URL: ${audioUrl}`);
+  console.log(`   Audio URL: ${audioUrl}`);
   
   // TwiML XML response that instructs Twilio to:
   // 1. Answer the call
   // 2. Play the audio file (Ken Nordine's "What time is it?")
+  // 3. Call ends automatically when audio finishes
   const twiml = `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
   <Play>${audioUrl}</Play>
 </Response>`;
 
-  return new Response(twiml, {
+  console.log(`   ✅ Returning valid TwiML XML`);
+
+  return new Response(twiml.trim(), {
     status: 200,
     headers: {
-      'Content-Type': 'text/xml',
+      'Content-Type': 'text/xml; charset=utf-8',
     },
   });
 };

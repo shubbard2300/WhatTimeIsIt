@@ -13,6 +13,11 @@
  * - PUBLIC_BASE_URL: Your deployment URL (e.g., https://your-app.vercel.app)
  */
 
+// Force Node.js runtime for Twilio SDK compatibility (not edge)
+export const config = {
+  runtime: 'nodejs'
+};
+
 import type { RequestHandler } from './$types';
 import { fetchDueCalls, markCallProcessing, markCallCompleted, markCallFailed } from '$lib/db/helpers';
 import twilio from 'twilio';
@@ -44,6 +49,8 @@ export const POST: RequestHandler = async ({ url }) => {
   
   // Build the TwiML callback URL (must be publicly accessible)
   const twimlUrl = `${PUBLIC_BASE_URL}/api/twilio/what-time-is-it`;
+  
+  console.log(`🌐 Using TwiML URL: ${twimlUrl}`);
   
   try {
     // Fetch all due calls from database
@@ -77,12 +84,13 @@ export const POST: RequestHandler = async ({ url }) => {
         console.log(`📞 Initiating call #${call.id} to ${call.toNumber}`);
         
         // Create the Twilio call
+        // NOTE: Twilio will POST to the URL after the call is answered
         const twilioCall = await twilioClient.calls.create({
           from: TWILIO_FROM_NUMBER,
           to: call.toNumber,
           url: twimlUrl,
-          // Optional: set a timeout for the call
-          timeout: 30,
+          method: 'POST', // Explicitly specify POST method
+          timeout: 30, // Ring timeout in seconds
         });
         
         await markCallCompleted(call.id);
