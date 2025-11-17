@@ -124,7 +124,7 @@
 <svelte:head>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Space+Mono:wght@400;700&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Space+Mono:wght@400;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Special+Elite&display=swap" rel="stylesheet">
 </svelte:head>
 
 <svelte:window on:mousemove={handleMouseMove} />
@@ -215,20 +215,15 @@
         <div class="w-12 h-0.5 bg-[#D94C3D]"></div>
       </div>
       
-      <p class="text-sm md:text-base text-[#2B2B2B] leading-relaxed max-w-lg mx-auto" style="font-family: 'Space Mono', monospace;">
+      <p class="text-sm md:text-base text-[#2B2B2B] leading-relaxed max-w-lg mx-auto" style="font-family: 'Baskervville', serif;">
         A tiny <span class="font-bold italic">word-jazz</span> reminder.<br/>
         You pick the moment. Later, a calm little voice<br/>
         shows up and asks one slippery question
       </p>
-      
-      <!-- Featured attribution -->
-      <div class="inline-block mt-4 px-4 py-2 bg-[#2B2B2B] text-white text-xs tracking-wider rounded-sm" style="font-family: 'Space Mono', monospace;">
-        .. FEATURING KEN NORDINE
-      </div>
     </header>
 
     <form class="space-y-6" on:submit={submit}>
-      <div class="space-y-2">
+      <div class="space-y-2 text-center">
         <label class="block text-sm font-bold tracking-wide text-[#2B2B2B] uppercase" for="phone" style="font-family: 'Space Mono', monospace; letter-spacing: 0.1em;">
           Phone number
         </label>
@@ -237,16 +232,16 @@
           type="tel"
           bind:value={phone}
           required
-          class="w-full bg-[#FFF9E6] border-3 border-[#2B2B2B] rounded-md px-4 py-3 text-base text-[#2B2B2B] outline-none focus:border-[#D94C3D] focus:shadow-lg transition-all placeholder:text-gray-500 font-mono"
+          class="w-full bg-[#FFF9E6] border-3 border-[#2B2B2B] rounded-md px-4 py-3 text-base text-[#2B2B2B] outline-none focus:border-[#D94C3D] focus:shadow-lg transition-all placeholder:text-gray-500 font-mono text-center"
           placeholder="+1 555 123 4567"
-          style="font-family: 'Space Mono', monospace;"
+          style="font-family: 'Courier Prime', monospace;"
         />
-        <p class="text-xs text-[#2B2B2B]/70 italic" style="font-family: 'Space Mono', monospace;">
+        <p class="text-xs text-[#2B2B2B]/70 italic" style="font-family: 'Baskervville', serif;">
           A voice from the ether. A question. Just <em>time</em>.
         </p>
       </div>
 
-      <div class="space-y-2">
+      <div class="space-y-2 text-center">
         <label class="block text-sm font-bold tracking-wide text-[#2B2B2B] uppercase" for="time" style="font-family: 'Space Mono', monospace; letter-spacing: 0.1em;">
           When should the question arrive?
         </label>
@@ -255,10 +250,10 @@
           type="datetime-local"
           bind:value={scheduledTime}
           required
-          class="w-full bg-[#FFF9E6] border-3 border-[#2B2B2B] rounded-md px-4 py-3 text-base text-[#2B2B2B] outline-none focus:border-[#D94C3D] focus:shadow-lg transition-all font-mono"
-          style="font-family: 'Space Mono', monospace; color-scheme: light;"
+          class="w-full bg-[#FFF9E6] border-3 border-[#2B2B2B] rounded-md px-4 py-3 text-base text-[#2B2B2B] outline-none focus:border-[#D94C3D] focus:shadow-lg transition-all font-mono text-center"
+          style="font-family: 'Courier Prime', monospace; color-scheme: light;"
         />
-        <p class="text-xs text-[#2B2B2B]/70 italic" style="font-family: 'Space Mono', monospace;">
+        <p class="text-xs text-[#2B2B2B]/70 italic" style="font-family: 'Baskervville', serif;">
           Your local time. A pin dropped in the fabric of <em>now</em>.
         </p>
       </div>
@@ -306,11 +301,6 @@
     {/if}
 
     <footer class="mt-8 border-t-2 border-[#2B2B2B] pt-6">
-      <div class="inline-block px-3 py-1 bg-[#E8A740] mb-3 rounded-sm">
-        <p class="text-xs text-[#2B2B2B] font-bold tracking-widest" style="font-family: 'Space Mono', monospace;">
-          THE BEST OF WORD JAZZ, VOL. 1
-        </p>
-      </div>
       <p class="text-xs text-[#2B2B2B]/60 text-center leading-relaxed uppercase tracking-wider" style="font-family: 'Space Mono', monospace;">
         A toy for humans who dig strange questions<br />
         <span class="text-[#2B2B2B]/40">· No spam · No lists · Just one nudge from the future ·</span>
