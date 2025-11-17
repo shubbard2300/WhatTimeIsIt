@@ -5,10 +5,6 @@
       "schedule": "* * * * *"
     }
   ],
-  "bypassProtectionForPaths": [
-    "/api/twilio/*",
-    "/audio/*"
-  ],
   "headers": [
     {
       "source": "/api/twilio/(.*)",

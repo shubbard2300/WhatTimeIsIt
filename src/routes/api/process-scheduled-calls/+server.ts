@@ -15,7 +15,7 @@
 
 // Force Node.js runtime for Twilio SDK compatibility (not edge)
 export const config = {
-  runtime: 'nodejs'
+  runtime: 'nodejs20.x'
 };
 
 import type { RequestHandler } from './$types';

@@ -14,7 +14,7 @@
 
 // Force Node.js runtime (not edge) for compatibility
 export const config = {
-  runtime: 'nodejs'
+  runtime: 'nodejs20.x'
 };
 
 import type { RequestHandler } from './$types';
