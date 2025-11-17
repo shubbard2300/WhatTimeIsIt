@@ -1,24 +1,74 @@
-# What Time Is It?
+# What Time Is It? 🎙️
 
-A tiny word-jazz reminder app in the style of Ken Nordine. A philosophical take on time and reminders.
+A minimal SvelteKit application that schedules phone calls to play Ken Nordine's iconic "What time is it?" audio clip at a future date/time.
 
-## What Time Is It? (Local Dev)
+Built with modern, production-ready technologies optimized for Vercel deployment, featuring a stunning 1960s Word Jazz album aesthetic.
 
-- Run: `npm install` and then `npm run dev`
-- Open `http://localhost:5173`
-- Schedule a reminder 1–2 minutes in the future
-- After the time passes, visit `http://localhost:5173/api/cron` in the browser
-- Check the dev server logs to see which reminders would send an email or make a call
-- TwiML for the call is at `http://localhost:5173/api/twiml/what-time`
+## 🎨 Design
 
-## Features
+Inspired by Ken Nordine's legendary Word Jazz album covers - vibrant golden yellows, bold reds, hot pinks, and abstract geometric shapes with authentic vintage grain texture.
 
-- **Local-only**: No external services (no Twilio, Resend, or Postgres)
-- **In-memory storage**: Reminders stored in memory (reset on server restart)
-- **Email or phone reminders**: Choose your preferred channel
-- **TwiML endpoint**: Returns a Ken Nordine–style contemplative script
-- **Cron-like endpoint**: Manually trigger to check for due reminders
+## 🚀 Quick Start
 
-## Development
+```bash
+# Install dependencies
+npm install
 
-This is a SvelteKit TypeScript project. All reminders are stored in memory and will be lost when the dev server restarts.
+# Set up environment variables (see .env.local)
+# Get Twilio credentials and create Vercel Postgres database
+
+# Run database migrations
+npm run db:push
+
+# Start development server
+npm run dev
+```
+
+## 📚 Documentation
+
+All detailed documentation has been moved to the `documentation/` folder:
+
+- **[📖 Complete Guide](documentation/README.md)** - Full project overview, tech stack, API routes
+- **[⚙️ Setup Instructions](documentation/SETUP.md)** - Detailed local & production setup
+- **[🚀 Quick Start Guide](documentation/QUICKSTART.md)** - Get running in 5 minutes
+
+## 🔧 Tech Stack
+
+- **Frontend**: SvelteKit 2.x (Svelte 5)
+- **Database**: Vercel Postgres with Drizzle ORM
+- **Telephony**: Twilio Voice API
+- **Scheduling**: Vercel Cron Jobs
+- **Hosting**: Vercel (serverless functions)
+
+## 🎯 Features
+
+- Schedule future phone calls with date/time picker
+- Twilio integration for automated outbound calls
+- PostgreSQL database for persistent storage
+- Cron-based polling system for reliable scheduling
+- Beautiful 1960s album art inspired design
+- Fully responsive and accessible
+
+## 📝 Environment Variables Required
+
+```env
+TWILIO_ACCOUNT_SID     # From Twilio Console
+TWILIO_AUTH_TOKEN      # From Twilio Console  
+TWILIO_FROM_NUMBER     # Your Twilio voice number
+POSTGRES_URL           # Vercel Postgres connection
+PUBLIC_BASE_URL        # Your deployed URL
+```
+
+## 🎭 Live Demo
+
+Visit the deployed app to schedule your "What time is it?" moment!
+
+## 📄 License
+
+This is a demo application. Ensure you have consent before calling anyone and use only legal, licensed audio.
+
+---
+
+**Built with ❤️ for word-jazz enthusiasts everywhere.**
+
+*"What time is it?"* - Ken Nordine
