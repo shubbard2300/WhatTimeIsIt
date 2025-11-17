@@ -1,17 +1,59 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  
   let phone = '';
   let scheduledTime = '';
   let status = '';
   let loading = false;
+  let mysticalPhrase = '';
+  let mouseX = 0;
+  let mouseY = 0;
+  let currentHour = 0;
+  let showEasterEgg = false;
+  
+  const mysticalPhrases = [
+    'Time whispers in spirals...',
+    'The clock ticks backwards in dreams...',
+    'What is time but a jazz riff in the void?',
+    'Tick... tock... or is it tock... tick?',
+    'In the quantum realm, now is always...',
+    'Ken Nordine knows what time it isn\'t...',
+    'Between seconds, infinity breathes...',
+    'The fourth dimension winks at you...',
+    'Chronos laughed, and time bent...',
+    'Your future self sends regards...'
+  ];
+  
+  onMount(() => {
+    mysticalPhrase = mysticalPhrases[Math.floor(Math.random() * mysticalPhrases.length)];
+    currentHour = new Date().getHours();
+    
+    // Rotate mystical phrase every 8 seconds
+    const phraseInterval = setInterval(() => {
+      mysticalPhrase = mysticalPhrases[Math.floor(Math.random() * mysticalPhrases.length)];
+    }, 8000);
+    
+    return () => clearInterval(phraseInterval);
+  });
+  
+  function handleMouseMove(e: MouseEvent) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  }
+  
+  function handleTitleClick() {
+    showEasterEgg = !showEasterEgg;
+    setTimeout(() => showEasterEgg = false, 3000);
+  }
 
   // Basic client-side validation
   function validateForm(): string | null {
     if (!phone || phone.trim() === '') {
-      return 'Please enter a phone number';
+      return 'The void awaits... but first, a phone number';
     }
     
     if (!scheduledTime) {
-      return 'Please select a date and time';
+      return 'Time itself needs coordinates, friend';
     }
     
     // Check if time is in the past
@@ -19,7 +61,7 @@
     const now = new Date();
     
     if (scheduled < now) {
-      return 'Cannot schedule calls in the past';
+      return 'Even Ken Nordine can\'t call into yesterday...';
     }
     
     return null;
@@ -36,7 +78,14 @@
     }
     
     loading = true;
-    status = 'Setting the clock on this little experiment…';
+    const loadingPhrases = [
+      'Consulting the cosmic calendar...',
+      'Winding the metaphysical clock...',
+      'Tuning into the frequency of tomorrow...',
+      'Setting the coordinates in spacetime...',
+      'Whispering to the future...'
+    ];
+    status = loadingPhrases[Math.floor(Math.random() * loadingPhrases.length)];
 
     try {
       const res = await fetch('/api/schedule-call', {
@@ -49,16 +98,23 @@
       });
 
       if (res.ok) {
-        status = "All right. Later on, a quiet voice will check in and ask: \"What time is it?\"";
+        const successPhrases = [
+          "The ritual is complete. Ken will find you in the timestream...",
+          "A voice from the ether has been summoned. It knows your number...",
+          "The question has been scheduled. Time will deliver it like a postcard from nowhere...",
+          "Done. At the appointed hour, reality will ring...",
+          "Your temporal covenant is sealed. What time is it? You'll know when you know..."
+        ];
+        status = successPhrases[Math.floor(Math.random() * successPhrases.length)];
         phone = '';
         scheduledTime = '';
       } else {
         const errorData = await res.json().catch(() => ({ error: 'Unknown error' }));
-        status = `Something hiccuped: ${errorData.error || 'Please try again'}`;
+        status = `The spirits got tangled in the wires: ${errorData.error || 'Try the incantation again'}`;
       }
     } catch (err) {
       console.error(err);
-      status = 'The universe bumped the needle. Try again in a moment.';
+      status = 'Static in the cosmic radio. The signal will clear... try again shortly.';
     } finally {
       loading = false;
     }
@@ -71,6 +127,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Space+Mono:wght@400;700&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
 </svelte:head>
 
+<svelte:window on:mousemove={handleMouseMove} />
+
 <main class="min-h-screen flex items-center justify-center relative overflow-hidden">
   <!-- Ken Nordine inspired golden background -->
   <div class="absolute inset-0 bg-gradient-to-br from-[#E8A740] via-[#D89030] to-[#C87820]"></div>
@@ -78,6 +136,36 @@
   <!-- Enhanced paper/grain texture overlay for authentic 60s poster feel -->
   <div class="absolute inset-0 opacity-30 bg-noise"></div>
   <div class="absolute inset-0 opacity-10 bg-grain-heavy"></div>
+  
+  <!-- Floating mystical symbols -->
+  <div class="absolute left-[15%] top-[10%] text-6xl opacity-20 animate-float-symbol" style="font-family: 'Courier Prime', monospace;">∞</div>
+  <div class="absolute right-[20%] top-[30%] text-5xl opacity-25 animate-float-symbol-reverse" style="font-family: 'Courier Prime', monospace;">◐</div>
+  <div class="absolute left-[25%] bottom-[20%] text-7xl opacity-15 animate-spin-very-slow" style="font-family: 'Courier Prime', monospace;">☊</div>
+  <div class="absolute right-[12%] bottom-[35%] text-4xl opacity-20 animate-pulse-mystical" style="font-family: 'Courier Prime', monospace;">⧖</div>
+  <div class="absolute left-[8%] top-[45%] text-6xl opacity-15 animate-float-symbol" style="font-family: 'Courier Prime', monospace;">⚡</div>
+  <div class="absolute right-[30%] top-[60%] text-5xl opacity-20 animate-spin-reverse" style="font-family: 'Courier Prime', monospace;">⌇</div>
+  
+  <!-- Mystical phrase that floats across -->
+  {#if mysticalPhrase}
+    <div class="absolute top-[5%] left-0 right-0 text-center pointer-events-none">
+      <p class="text-sm text-white/40 italic animate-fade-in-out tracking-wider" style="font-family: 'Baskervville', serif; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+        {mysticalPhrase}
+      </p>
+    </div>
+  {/if}
+  
+  <!-- Easter egg modal -->
+  {#if showEasterEgg}
+    <div class="fixed inset-0 z-50 flex items-center justify-center pointer-events-none animate-fade-in">
+      <div class="bg-[#2B2B2B] text-white px-8 py-6 rounded-lg border-4 border-[#E8A740] shadow-2xl animate-scale-in">
+        <p class="text-2xl font-bold mb-2" style="font-family: 'Courier Prime', monospace;">🕰️ SECRET TRANSMISSION 🕰️</p>
+        <p class="text-sm italic" style="font-family: 'Baskervville', serif;">
+          "Time is a flat circle made of jazz notes..."<br/>
+          <span class="text-xs text-[#E8A740]">— Ken Nordine (probably)</span>
+        </p>
+      </div>
+    </div>
+  {/if}
   
   <!-- Large abstract geometric shapes - Word Jazz inspired -->
   <!-- Big red circle (left side) -->
