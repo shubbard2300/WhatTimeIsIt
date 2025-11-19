@@ -7,7 +7,7 @@
  * by scheduling a call for immediate delivery (1 minute from now)
  */
 
-const PRODUCTION_URL = 'https://what-time-is-1p52i4fs6-gamecat2300-6951s-projects.vercel.app';
+const PRODUCTION_URL = 'https://what-time-is-it-amber.vercel.app';
 
 async function testScheduleCall() {
   const phoneNumber = '+14153597606';
