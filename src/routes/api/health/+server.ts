@@ -24,10 +24,10 @@ export const GET: RequestHandler = async () => {
     }
   };
 
-  // Try to test database connection
+  // Try to test database connection using our actual db connection
   try {
-    const { sql } = await import('@vercel/postgres');
-    const result = await sql`SELECT 1 as test`;
+    const { db } = await import('$lib/db/connection');
+    const result = await db.execute('SELECT 1 as test' as any);
     diagnostics.database.status = '✅ Connected';
     diagnostics.database.testQuery = 'Success';
   } catch (error: any) {
