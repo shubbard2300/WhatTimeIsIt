@@ -202,8 +202,8 @@
         A somewhat new medium
       </div>
       
-      <h1 class="text-5xl md:text-7xl font-black tracking-tight text-[#2B2B2B] drop-shadow-sm" style="font-family: 'Courier Prime', monospace; letter-spacing: -0.02em;">
-        WHAT TIME<br/>IS IT?
+      <h1 class="text-4xl md:text-6xl font-black tracking-tight text-[#2B2B2B] drop-shadow-sm" style="font-family: 'Courier Prime', monospace; letter-spacing: -0.02em;">
+        WHAT TIME IS IT?
       </h1>
       
       <!-- Mid-century modern divider -->
