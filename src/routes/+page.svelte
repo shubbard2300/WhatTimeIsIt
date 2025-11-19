@@ -124,7 +124,7 @@
 <svelte:head>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Space+Mono:wght@400;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Special+Elite&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Space+Mono:wght@400;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Special+Elite&family=Anton&family=Bebas+Neue&display=swap" rel="stylesheet">
 </svelte:head>
 
 <svelte:window on:mousemove={handleMouseMove} />
@@ -202,7 +202,7 @@
         A somewhat new medium
       </div>
       
-      <h1 class="text-4xl md:text-6xl font-black tracking-tight text-[#2B2B2B] drop-shadow-sm" style="font-family: 'Courier Prime', monospace; letter-spacing: -0.02em;">
+      <h1 class="text-5xl md:text-7xl font-black tracking-tight text-[#2B2B2B] drop-shadow-sm" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;">
         WHAT TIME IS IT?
       </h1>
       
