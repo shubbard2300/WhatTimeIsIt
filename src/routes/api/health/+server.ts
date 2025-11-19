@@ -9,7 +9,7 @@ import type { RequestHandler } from './$types';
 import { env } from '$env/dynamic/private';
 
 export const GET: RequestHandler = async () => {
-  const diagnostics = {
+  const diagnostics: any = {
     timestamp: new Date().toISOString(),
     environment: {
       POSTGRES_URL: env.POSTGRES_URL ? '✅ Set' : '❌ Missing',
@@ -20,15 +20,16 @@ export const GET: RequestHandler = async () => {
     },
     database: {
       status: 'unknown',
-      error: null as string | null
+      error: null
     }
   };
 
   // Try to test database connection
   try {
-    const { db } = await import('$lib/db/connection');
-    await db.execute('SELECT 1' as any);
+    const { sql } = await import('@vercel/postgres');
+    const result = await sql`SELECT 1 as test`;
     diagnostics.database.status = '✅ Connected';
+    diagnostics.database.testQuery = 'Success';
   } catch (error: any) {
     diagnostics.database.status = '❌ Failed';
     diagnostics.database.error = error?.message || String(error);
