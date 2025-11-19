@@ -4,14 +4,17 @@
  * Uses Vercel Postgres with Drizzle ORM.
  * Environment variable required: POSTGRES_URL
  * 
- * Using @vercel/postgres which automatically reads from 
- * process.env.POSTGRES_URL and manages connection pooling.
+ * Using createPool from @vercel/postgres for proper connection pooling
+ * in serverless environments.
  */
 
 import { drizzle } from 'drizzle-orm/vercel-postgres';
-import { sql } from '@vercel/postgres';
+import { createPool } from '@vercel/postgres';
 import * as schema from './schema';
 
-// Initialize drizzle with the sql client from @vercel/postgres
-// The sql client automatically uses POSTGRES_URL from environment variables
-export const db = drizzle(sql, { schema });
+// Create a connection pool which is appropriate for serverless
+// It will automatically use POSTGRES_URL from environment variables
+const pool = createPool();
+
+// Initialize drizzle with the connection pool
+export const db = drizzle(pool, { schema });
