@@ -216,7 +216,6 @@
       </div>
       
       <p class="text-sm md:text-base text-[#2B2B2B] leading-relaxed max-w-lg mx-auto" style="font-family: 'Baskervville', serif;">
-        A tiny <span class="font-bold italic">word-jazz</span> reminder.<br/>
         You pick the moment. Later, a calm little voice<br/>
         shows up and asks one slippery question
       </p>
