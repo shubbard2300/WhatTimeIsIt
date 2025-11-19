@@ -206,18 +206,10 @@
         WHAT TIME IS IT?
       </h1>
       
-      <!-- Mid-century modern divider -->
-      <div class="flex justify-center items-center gap-3 my-6">
-        <div class="w-12 h-0.5 bg-[#D94C3D]"></div>
-        <div class="w-3 h-3 bg-[#E8638C] rotate-45"></div>
-        <div class="text-sm tracking-widest text-[#2B2B2B] font-bold" style="font-family: 'Space Mono', monospace;">WORD JAZZ</div>
-        <div class="w-3 h-3 bg-[#E8638C] rotate-45"></div>
-        <div class="w-12 h-0.5 bg-[#D94C3D]"></div>
-      </div>
       
       <p class="text-sm md:text-base text-[#2B2B2B] leading-relaxed max-w-lg mx-auto" style="font-family: 'Baskervville', serif;">
-        You pick the moment. Later, a calm little voice<br/>
-        shows up and asks one slippery question
+        You pick the moment. <br />Later, a calm little voice
+        calls your friend<br/>&  asks one slippery question
       </p>
     </header>
 
