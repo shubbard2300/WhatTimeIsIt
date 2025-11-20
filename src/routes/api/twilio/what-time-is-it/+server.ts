@@ -30,9 +30,10 @@ const handleTwiML: RequestHandler = async ({ url, request }) => {
   // Get the base URL - uses PUBLIC_BASE_URL from env, or falls back to request origin
   const baseUrl = env.PUBLIC_BASE_URL || url.origin;
   
-  // Audio file is served from /static/audio/what-time-is-it.mp3
+  // Audio file is served from /static/audio/what-time-is-it.wav
   // SvelteKit automatically serves static files from the /static folder
-  const audioUrl = `${baseUrl}/audio/what-time-is-it.mp3`;
+  // Using WAV format (8kHz, 16-bit, mono) for better Twilio compatibility
+  const audioUrl = `${baseUrl}/audio/what-time-is-it.wav`;
   
   console.log(`   Audio URL: ${audioUrl}`);
   
