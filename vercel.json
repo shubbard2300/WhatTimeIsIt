@@ -30,5 +30,8 @@
       "source": "/api/twilio/:path*",
       "destination": "/api/twilio/:path*"
     }
-  ]
+  ],
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".svelte-kit"
 }
