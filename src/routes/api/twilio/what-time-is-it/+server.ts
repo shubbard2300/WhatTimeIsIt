@@ -39,11 +39,12 @@ const handleTwiML: RequestHandler = async ({ url, request }) => {
   
   // TwiML XML response that instructs Twilio to:
   // 1. Answer the call
-  // 2. Play the audio file (Ken Nordine's "What time is it?")
-  // 3. Call ends automatically when audio finishes
+  // 2. Say a message using text-to-speech (temporary fallback)
+  // 3. Then try to play the audio file
+  // 4. Call ends automatically when audio finishes
   const twiml = `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
-  <Play>${audioUrl}</Play>
+  <Say voice="man">What time is it?</Say>
 </Response>`;
 
   console.log(`   ✅ Returning valid TwiML XML`);
